@@ -31,7 +31,7 @@ class preprocss:
 
     def data_clean(self,df):
         df = df
-        df['full_review'] = df['title']+' '+df['review']
+        df['full_review'] = df['review']
         df.drop('review_length',axis=1,inplace=True)
         df['char_len'] = df['full_review'].apply(lambda x: len(x))
         df['word_len'] = df['full_review'].apply(lambda x : len(x.split(" ")))
@@ -379,12 +379,12 @@ class preprocss:
 
         t_df = pd.concat([t_df1,t_df2,t_df3,t_df4,t_df5],axis=0)
 
-        fig = px.bar(t_df,
+        fig = px.funnel(t_df,
                         x = 'count',
                         y = 'index',
                         color='rating',
                         title = 'Top 10 Repeting words in each ratings ',
-                        color_continuous_scale=my_col,
+                        color_discrete_sequence=my_col,
                         labels= {'count':'Frequiency of the word',
                                  'index':'Words'})
         fig.update_layout(
