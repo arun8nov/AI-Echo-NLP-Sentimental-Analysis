@@ -380,16 +380,16 @@ class preprocss:
         t_df = pd.concat([t_df1,t_df2,t_df3,t_df4,t_df5],axis=0)
 
         fig = px.funnel(t_df,
-                        x = 'count',
-                        y = 'index',
+                        y = 'count',
+                        x = 'index',
                         color='rating',
                         title = 'Top 10 Repeting words in each ratings ',
                         color_discrete_sequence=my_col,
                         labels= {'count':'Frequiency of the word',
                                  'index':'Words'})
         fig.update_layout(
-            height = 1000,
-            title = { 'x' : 0.25}
+            height = 600,
+            title = { 'x' : 0.4}
         )
         
         return fig

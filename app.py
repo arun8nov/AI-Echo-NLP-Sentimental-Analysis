@@ -10,6 +10,8 @@ import pickle
 import streamlit as st
 from dash import preprocss
 
+model = pickle.load(open('model.pkl','rb'))
+
 PR= preprocss()
 
 
@@ -30,7 +32,7 @@ url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sh
 data = pd.read_csv(url)
 
 
-def Data():
+def Main_Dash():
     Heder()
     df = PR.data_clean(data)
     st.dataframe(df)
@@ -85,11 +87,28 @@ def Data():
     c2.plotly_chart(PR.rat_4_words(s_df))
     c3.plotly_chart(PR.rat_5_words(s_df))
 
-    c1,c2 = st.columns(2)
-    c1.plotly_chart(PR.frq_count(s_df))
+   
+    st.plotly_chart(PR.frq_count(s_df))
 
 
+def Classification():
 
+    Heder()
+    
+    with st.form(key= 'Review Classification'):
+
+        text_data = st.text_input('Enter Review')
+
+        submit_button = st.form_submit_button(label='submit')
+
+        if submit_button:
+            result = model.predict(pd.Series(text_data))[0]
+            if result == 'pos':
+                st.success('Positive')
+            elif result == 'neu':
+                st.success('Neutral')
+            else:
+                st.error('Negative')
 
     
     
@@ -102,5 +121,5 @@ def Data():
 
 
 
-pg = st.navigation([Data])
+pg = st.navigation([Main_Dash,Classification],position='top')
 pg.run()

@@ -10,3 +10,7 @@ contractions
 wordcloud
 streamlit
 imbalanced-learn
+transformers
+torch
+tensorflow
+keras
