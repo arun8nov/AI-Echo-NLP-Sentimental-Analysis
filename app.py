@@ -125,6 +125,8 @@ def Gpt_Dash():
     c1.plotly_chart(CR.review_over_year(df))
     c2.plotly_chart(CR.review_over_month(df))
 
+    st.plotly_chart(CR.time_Analysis(df))
+
     f1,f2,f3 = CR.overall_wordcloud(df)
     c1,c2,c3 = st.columns(3)
     c1.plotly_chart(f1)

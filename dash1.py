@@ -379,3 +379,21 @@ class chatgpt_review():
 
         return fig
         
+    def time_Analysis(self,df):
+        t_df = df.copy()
+        t_df['month_year'] = t_df['date'].dt.to_period('M')
+        t_df = t_df.groupby(['month_year','label'])['final_text'].count().reset_index()
+        t_df['month_year'] = t_df['month_year'].astype(str)
+        fig = px.line(
+            t_df,
+            x='month_year',
+            y='final_text',
+            color='label',
+            title='Reviews Over Time by Sentiment',
+            color_discrete_sequence=my_col
+        )
+        fig.update_layout(
+            title ={'x':0.5}
+        )
+
+        return fig
