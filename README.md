@@ -28,12 +28,20 @@ It features an **interactive Streamlit dashboard** and an **analytical Dash-base
 ```
 AI-Echo-NLP-Sentimental-Analysis/
 │
-├── app.py              # Streamlit app for user-facing sentiment predictions
-├── dash.py             # Dash visualization dashboard (data analytics)
-├── dash1.py            # Alternate Dash dashboard (exploratory analysis)
+├──data
+    ├──chatgpt_reviews_en_clean.csv  # Sample cleaned data set from kaggle
+    ├──chatgpt_reviews_en.csv # Cleaned dataset from kaggle
+    ├──sample_chatgpt_review_en.csv # Given Data set
+├── app.py              # Streamlit app for user interaction with data and prediction of text sentiment
+├── dash.py             # class and object for dashboard visualization
+├── dash1.py            # class and object for dashboard visualization
+├──kagg_process_1.ipynb # Kaggle Data clean and sample data generation
+├──kagg_process.ipynb # Kaggle sample data visulization and Ml model build
+├──process_nltk_veder.ipynb  # NLTK vedar sentiment Analysis 
+├──process_transformers.ipynb # Hugging face Transformer Sentiment Analysis
+├──process.ipynb # Review based Sentimnet Analysis
 ├── requirements.txt    # Dependencies
-├── data/               # Dataset (CSV or text files)
-├── models/             # Saved ML/DL models (.pkl or .h5)
+├── model/              # Saved ML models .pkl 
 ├── assets/             # Images, icons, and dashboard-related assets
 └── README.md           # Project documentation
 ```
@@ -54,8 +62,19 @@ python -m venv venv
 source venv/bin/activate   # On Mac/Linux
 venv\Scripts\activate      # On Windows
 ```
+### 3. Downlode data folder from google drive link as follows and move into directory
 
-### 3. Install Dependencies
+Drive Link: https://drive.google.com/drive/folders/11PCb4A7MCIOGJl4TsDuPcz-xb6fq1hXz?usp=sharing
+
+#### Structure should be as like follows
+```
+├──data
+    ├──chatgpt_reviews_en_clean.csv  # Sample cleaned data set from kaggle
+    ├──chatgpt_reviews_en.csv # Cleaned dataset from kaggle
+    ├──sample_chatgpt_review_en.csv # Given Data set
+```
+
+### 4. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
@@ -67,16 +86,6 @@ pip install -r requirements.txt
 ### ▶️ Streamlit Interface
 ```bash
 streamlit run app.py
-```
-
-### 📊 Dash Dashboard
-```bash
-python dash.py  class and objects
-```
-
-### 🔍 Alternate Dashboard
-```bash
-python dash1.py  class and objects
 ```
 
 Then open your browser at the displayed `localhost` or `127.0.0.1` URL.
@@ -121,7 +130,7 @@ emoji
    - Detect and normalize language  
 
 3. **Feature Engineering**  
-   - TF-IDF, Word2Vec, or BERT embeddings  
+   - TF-IDFembeddings  
    - Handle class imbalance using SMOTE  
 
 4. **Model Training & Evaluation**  
@@ -147,10 +156,10 @@ emoji
 | Category | Tools / Libraries |
 |-----------|-------------------|
 | Programming | Python |
-| ML Frameworks | scikit-learn, TensorFlow, Keras, PyTorch |
+| ML Frameworks | scikit-learn, TensorFlow, Keras |
 | NLP Tools | NLTK, Transformers, LangDetect, Contractions |
 | Visualization | Matplotlib, Seaborn, Plotly, WordCloud |
-| Web App | Streamlit, Dash |
+| Web App | Streamlit |
 | Others | Pandas, NumPy, Imbalanced-learn |
 
 ---
@@ -159,20 +168,12 @@ emoji
 
 Enter a text such as:
 
-> “The product quality is amazing and delivery was super fast!”
+> “Good app help project file helpful easy use free”
 
 AI Echo will classify it as **Positive**, showing related word frequency and sentiment visualization.
 
 ---
 
-## 💡 Future Enhancements
-
-- Integrate real-time social media data (Twitter API, YouTube comments).  
-- Add multi-language sentiment support.  
-- Implement fine-tuned transformer models (e.g., RoBERTa, DistilBERT).  
-- Include topic modeling and emotion detection.
-
----
 
 ## 👨‍💻 Author
 
