@@ -1,3 +1,4 @@
+# Libraires imporatation
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,31 +16,33 @@ from wordcloud import WordCloud
 import warnings
 warnings.filterwarnings("ignore")
 
-
+# Download nltk resources
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 nltk.download('stopwords')
-
+nltk.download('punkt')
+# Global Variables
 lemmatizer =  WordNetLemmatizer()
 stopwords = stopwords.words('english')
-
+# Custom color pallete
 my_col = ['#1f77b4', '#2ca02c', '#8c564b', '#7f7f7f', '#17becf']
 
+# Preprocessing Class
 class preprocss:
     def __init__(self):
         pass
-
+    # Data Cleaning Function
     def data_clean(self,df):
         df = df
-        df['full_review'] = df['review']
-        df.drop('review_length',axis=1,inplace=True)
-        df['char_len'] = df['full_review'].apply(lambda x: len(x))
-        df['word_len'] = df['full_review'].apply(lambda x : len(x.split(" ")))
-        df['sent_len'] = df['full_review'].apply(lambda x : len(sent_tokenize(x)))  
+        df['full_review'] = df['review'] 
+        df.drop('review_length',axis=1,inplace=True) # Dropping review_length column if exists
+        df['char_len'] = df['full_review'].apply(lambda x: len(x)) # Character length
+        df['word_len'] = df['full_review'].apply(lambda x : len(x.split(" "))) # Word length
+        df['sent_len'] = df['full_review'].apply(lambda x : len(sent_tokenize(x)))   # Sentence length
         return df
-    
+    # Text Cleaning Function
     def text_clean(self,df):
-        df = df[['full_review','rating']]
+        df = df[['full_review','rating']] # Selecting only required columns
 
         # Inner Fuction 1 for text cleaning
         def text_cleaning(text):
@@ -65,18 +68,19 @@ class preprocss:
         
         # Inner Function 2 for Lemmatation
         def lemma(text):
-            text = word_tokenize(text)
-            text =  [contractions.fix(word) for word in text]
-            text = [lemmatizer.lemmatize(word) for word in text if word not in stopwords]
-            text = ' '.join(text)
+            text = word_tokenize(text) # Tokenization
+            text =  [contractions.fix(word) for word in text] # Expanding Contractions
+            text = [lemmatizer.lemmatize(word) for word in text if word not in stopwords] # Lemmatization and Stopword removal
+            text = ' '.join(text) # Joining the tokens back to string
             return text
-        df['final_text'] = df['full_review'].apply(text_cleaning).apply(lemma)
+        df['final_text'] = df['full_review'].apply(text_cleaning).apply(lemma) # Applying both inner functions
 
-        df = df[['final_text','rating']]
+        df = df[['final_text','rating']] # Selecting only required columns
 
         return df
     
-
+    # Dashboard objects
+    
     def rat_dis(self,df):
         fig = px.histogram(df,
                    x='rating',

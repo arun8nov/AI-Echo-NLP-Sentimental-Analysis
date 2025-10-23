@@ -1,3 +1,4 @@
+# Necessary Libraries 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,16 +18,18 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import langid
 import warnings
 warnings.filterwarnings("ignore")
-
+# Downlod NLTk 
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 nltk.download('stopwords')
 nltk.download('vader_lexicon')
-
+nltk.download('punkt')
+nltk.download('punkt_tab')
+# Import class
 lemmatizer =  WordNetLemmatizer()
 stopwords = stopwords.words('english')
 analyzer = SentimentIntensityAnalyzer()
-
+# Assign custom pallete
 my_col = [
     '#FF6F61',  
     '#6B5B95',  
@@ -39,6 +42,7 @@ my_col = [
     '#D65076',  
     '#45B8AC'   
 ]
+# 
 class chatgpt_review():
     def __init__(self):
         pass
